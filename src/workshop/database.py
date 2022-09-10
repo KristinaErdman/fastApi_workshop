@@ -13,3 +13,12 @@ Session = sessionmaker(
     autocommit=False,
     autoflush=False,
 )
+
+
+def get_session() -> Session:
+    """Depend for create and close session"""
+    session = Session()
+    try:
+        yield session
+    finally:
+        session.close()
