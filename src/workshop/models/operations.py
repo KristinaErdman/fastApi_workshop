@@ -11,8 +11,7 @@ class OperationKind(str, Enum):
     EXPENSE = 'expense'
 
 
-class Operations(BaseModel):
-    id: int
+class OperationBase(BaseModel):
     date: date
     kind: OperationKind
     amount: Decimal
@@ -20,3 +19,15 @@ class Operations(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class Operation(OperationBase):
+    id: int
+
+
+class OperationCreate(OperationBase):
+    pass
+
+
+class OperationUpdate(OperationBase):
+    pass
