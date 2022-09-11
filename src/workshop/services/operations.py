@@ -26,6 +26,14 @@ class OperationService:
         else:
             return operation
 
+    def create_many(self, operations_data: List[OperationCreate], user_id: int) -> List[Operation]:
+        operations = list(
+            map(lambda operation_data: Operation(**operation_data.dict(), user_id=user_id), operations_data)
+        )
+        self.session.add_all(operations)
+        self.session.commit()
+        return operations
+
     def create(self, user_id: int, operation_data: OperationCreate) -> Operation:
         operation = Operation(**operation_data.dict(), user_id=user_id)
         self.session.add(operation)
