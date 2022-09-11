@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, UploadFile, File
+from fastapi import APIRouter, Depends, UploadFile, File, BackgroundTasks
 from fastapi.responses import StreamingResponse
 
 from ..models.auth import User
@@ -10,11 +10,16 @@ router = APIRouter(prefix='/reports', tags=["Reports", ])
 
 @router.post('/import')
 def import_csv(
+        background_tasks: BackgroundTasks,
         file: UploadFile = File(...),
         user: User = Depends(get_current_user),
-        reports_service: ReportsService = Depends()
+        reports_service: ReportsService = Depends(),
 ):
-    return reports_service.import_csv(user_id=user.id, file=file.file)
+    background_tasks.add_task(
+        reports_service.import_csv,
+        user.id,
+        file.file
+    )
 
 
 @router.get('/export')
