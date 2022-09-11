@@ -7,7 +7,7 @@ from ..models.operations import Operation, OperationKind, OperationCreate, Opera
 from ..services.auth import get_current_user
 from ..services.operations import OperationService
 
-router = APIRouter(prefix='/operations', tags=["Operation", ])
+router = APIRouter(prefix='/operations', tags=["Operations", ])
 
 
 @router.get('/', response_model=List[Operation])
@@ -16,6 +16,11 @@ def get_operations(
         user: User = Depends(get_current_user),
         service: OperationService = Depends()
 ):
+    """
+    Получение списка операций текущего пользователя
+
+    - **kind**: Фильтр по виду операций
+    """
     return service.get_list(user.id, kind)
 
 
