@@ -9,3 +9,8 @@
 `from secrets import token_urlsafe`
 
 `token_urlsafe()`
+
+## запуск
+`cd src`
+
+`uvicorn workshop.__main__:app --reload`
