@@ -52,7 +52,7 @@ def update_operation(
     return service.update(operation_id, operation_data, user.id)
 
 
-@router.delete('/{operation_id}')
+@router.delete('/{operation_id}', status_code=status.HTTP_204_NO_CONTENT)
 def delete_operation(
         operation_id: int,
         user: User = Depends(get_current_user),

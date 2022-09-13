@@ -20,7 +20,7 @@ class OperationService:
         return operations
 
     def get(self, operation_id: int, user_id: int, ) -> Operation:
-        operation = self.session.query(Operation).filter_by(id=operation_id, user_id=user_id)
+        operation = self.session.query(Operation).filter_by(id=operation_id, user_id=user_id).first()
         if not operation:
             raise HTTPException(status.HTTP_404_NOT_FOUND)
         else:
@@ -41,7 +41,7 @@ class OperationService:
         return operation
 
     def update(self, operation_id: int, operation_data: OperationUpdate, user_id: int, ) -> Operation:
-        operation = self.get(operation_id)
+        operation = self.get(operation_id, user_id)
         if operation.user_id != user_id:
             raise HTTPException(status.HTTP_403_FORBIDDEN)
         for field, value in operation_data:
@@ -50,7 +50,7 @@ class OperationService:
         return operation
 
     def delete(self, operation_id: int, user_id: int, ):
-        operation = self.get(operation_id)
+        operation = self.get(operation_id, user_id)
         if operation.user_id != user_id:
             raise HTTPException(status.HTTP_403_FORBIDDEN)
         self.session.delete(operation)
