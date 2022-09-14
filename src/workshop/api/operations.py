@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from fastapi import APIRouter, Depends, Response, status
+from fastapi import APIRouter, Depends, Response, status, Body, Query, Path
 
 from ..models.auth import User
 from ..models.operations import Operation, OperationKind, OperationCreate, OperationUpdate
@@ -12,7 +12,7 @@ router = APIRouter(prefix='/operations', tags=["Operations", ])
 
 @router.get('/', response_model=List[Operation])
 def get_operations(
-        kind: Optional[OperationKind] = None,
+        kind: Optional[OperationKind] = Query(default=None),
         user: User = Depends(get_current_user),
         service: OperationService = Depends()
 ):
@@ -26,7 +26,7 @@ def get_operations(
 
 @router.get('/{operation_id}', response_model=Operation)
 def get_operation(
-        operation_id: int,
+        operation_id: int = Path(),
         user: User = Depends(get_current_user),
         service: OperationService = Depends()
 ):
@@ -35,7 +35,7 @@ def get_operation(
 
 @router.post('/', response_model=Operation)
 def create_operation(
-        operation_data: OperationCreate,
+        operation_data: OperationCreate = Body(),
         user: User = Depends(get_current_user),
         service: OperationService = Depends()
 ):
@@ -44,8 +44,8 @@ def create_operation(
 
 @router.put('/{operation_id}', response_model=Operation)
 def update_operation(
-        operation_id: int,
-        operation_data: OperationUpdate,
+        operation_id: int = Path(),
+        operation_data: OperationUpdate = Body(),
         user: User = Depends(get_current_user),
         service: OperationService = Depends()
 ):
@@ -54,7 +54,7 @@ def update_operation(
 
 @router.delete('/{operation_id}', status_code=status.HTTP_204_NO_CONTENT)
 def delete_operation(
-        operation_id: int,
+        operation_id: int = Path(),
         user: User = Depends(get_current_user),
         service: OperationService = Depends()
 ):
