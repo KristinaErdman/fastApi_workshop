@@ -14,3 +14,6 @@
 `cd src`
 
 `uvicorn workshop.__main__:app --reload`
+
+## работа с alembic
+`alembic init migrations`
