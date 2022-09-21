@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 from src.workshop.settings import settings
-from src.workshop.database import Base
+from src.workshop.tables import Base  # нужен файл в который будет импортирован Base и все модели
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
