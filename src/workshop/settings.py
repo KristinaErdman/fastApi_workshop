@@ -4,7 +4,8 @@ from pydantic import BaseSettings
 class Settings(BaseSettings):
     server_host: str = '127.0.0.1'
     server_port: int = 8000
-    database_url: str = 'sqlite:///./database.sqlite3'
+    database_url: str = "postgresql://postgres:1234@localhost/workshop"
+    # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
     jwt_secret: str
     jwt_algorithm: str = 'HS256'
     jwt_expiration: int = 3600  # (sec)
