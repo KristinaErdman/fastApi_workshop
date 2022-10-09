@@ -17,5 +17,7 @@
 
 ## работа с alembic
 `alembic init migrations`
+
 `alembic revision --autogenerate -m "name of migration"` - создать миграцию
+
 `alembic upgrade head` - применить миграции
