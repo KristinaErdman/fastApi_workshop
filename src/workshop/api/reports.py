@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, UploadFile, File, BackgroundTasks
 from fastapi.responses import StreamingResponse
 
+from ..dependencies import get_current_user
 from ..models.auth import User
-from ..services.auth import get_current_user
 from ..services.reports import ReportsService
 
 router = APIRouter(prefix='/reports', tags=["Reports", ])

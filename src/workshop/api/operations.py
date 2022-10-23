@@ -2,9 +2,9 @@ from typing import List, Optional
 
 from fastapi import APIRouter, Depends, Response, status, Body, Query, Path
 
+from ..dependencies import get_current_user
 from ..models.auth import User
 from ..models.operations import Operation, OperationKind, OperationCreate, OperationUpdate
-from ..services.auth import get_current_user
 from ..services.operations import OperationService
 
 router = APIRouter(prefix='/operations', tags=["Operations", ])

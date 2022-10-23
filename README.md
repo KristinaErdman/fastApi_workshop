@@ -10,6 +10,11 @@
 
 `token_urlsafe()`
 
+или
+
+`openssl rand -hex 32`
+
+
 ## запуск
 `cd src`
 

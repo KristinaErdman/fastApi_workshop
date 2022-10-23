@@ -9,8 +9,8 @@ uvicorn = {extras = ["standard"], version = "==0.18.3"}
 pydantic = "==1.10.2"
 python-dotenv = "==0.21.0"
 sqlalchemy = "==1.4.41"
-python-jose = "==3.3.0"
-passlib = "==1.7.4"
+python-jose = "==3.3.0" # для генерации и проверки токенов JWT
+passlib = "==1.7.4" # для обработки хэшей паролей.
 python-multipart = "==0.0.5"
 email-validator = "==1.2.1"
 bcrypt = "==4.0.0"

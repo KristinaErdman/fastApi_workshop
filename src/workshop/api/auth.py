@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, Body
 from fastapi.security import OAuth2PasswordRequestForm
 
+from ..dependencies import get_current_user
 from ..models.auth import Token, UserCreate, User
-from ..services.auth import AuthService, get_current_user
+from ..services.auth import AuthService
 
 router = APIRouter(prefix='/auth', tags=["Auth", ])
 
